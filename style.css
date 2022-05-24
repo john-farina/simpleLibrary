@@ -159,8 +159,15 @@ h4 {
 }
 .fontPicker {
     display: none;
+    font-size: 22px;
+    border-style: dashed;
+    border-color: red;
+    font-weight: bolder;
     background-color: rgba(0, 0, 0, 0%);
     border-style: none;
+}
+.fontPicker:hover {
+    background-color: rgba(0, 0, 0, 0%);
 }
 .fa-font {
     font-size: 18px;

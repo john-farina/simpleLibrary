@@ -145,9 +145,11 @@ function addBookToPage() {
         let fontPicker = document.createElement('button');
         fontPicker.classList.add('bookButton');
         fontPicker.classList.add('fontPicker');
-        fontPicker.innerHTML = '<i id="fontId" class="fa-solid fa-font"></i>';
+        fontPicker.style.color = myLibrary[i].fontColor;
+        fontPicker.innerHTML = 'Aa';
         fontPicker.addEventListener('click', function () {
             if (myLibrary[i].fontColor === 'black') {
+                fontIsBlack = false;
                 fontPicker.style.color = 'white';
                 myLibrary[i].fontColor = 'white';
             } else {
