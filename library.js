@@ -1,7 +1,9 @@
-let myLibrary = [];
+const myLibrary = [];
 const body = document.querySelector('body');
 const container = document.querySelector('#container');
 let formIsOpen = false;
+let colorIsOpen = false;
+let fontIsBlack = true;
 
 const fillOutForm = document.querySelector('#fillOutForm');
 const formButton = document.querySelector('#formButton');
@@ -18,6 +20,8 @@ function Book(title, author, pages, read) {
         author: author,
         pages: pages,
         read: read,
+        color: '#d4af19',
+        fontColor: 'black',
     };
     return aBook;
 }
@@ -29,6 +33,12 @@ function addBookToLibrary(title, author, pages, read) {
 
 addBookToLibrary('Ready Player One', 'Ernist Cline', 384, true);
 addBookToLibrary('Psycho', 'Robert Bloch', 200, true);
+addBookToLibrary(
+    'Willy Wonka and the Chocolate Factory',
+    'Roald Dahl',
+    192,
+    false
+);
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -41,6 +51,9 @@ function addBookToPage() {
     for (let i = 0; i < myLibrary.length; i++) {
         let bookDiv = document.createElement('div');
         bookDiv.classList.add('bookContainer');
+        bookDiv.classList.add(`book${i}`);
+        bookDiv.style.backgroundColor = myLibrary[i].color;
+        bookDiv.style.color = myLibrary[i].fontColor;
 
         let bookEdge = document.createElement('div');
         bookEdge.classList.add('bookEdge');
@@ -54,31 +67,129 @@ function addBookToPage() {
 
         let bookAuthor = document.createElement('h3');
         bookAuthor.classList.add('bookAuthor');
-        bookAuthor.innerHTML = myLibrary[i].author;
+        bookAuthor.innerHTML = 'By ' + myLibrary[i].author;
 
         let bookPages = document.createElement('h4');
         bookPages.classList.add('bookPages');
-        bookPages.innerHTML = myLibrary[i].pages;
+        bookPages.innerHTML = myLibrary[i].pages + ' pages';
 
         let readBook = document.createElement('h4');
         readBook.classList.add('readBook');
-        readBook.innerHTML = myLibrary[i].read;
+        if (myLibrary[i].read === true) {
+            readBook.innerHTML = 'I have read this book';
+        } else {
+            readBook.innerHTML = 'I havent read this book';
+        }
+
+        let buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('buttonCont');
+
+        let readButton = document.createElement('button');
+        readButton.classList.add('bookButton');
+        readButton.classList.add('readButton');
+        if (myLibrary[i].read === true) {
+            readButton.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        } else {
+            readButton.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        }
+        readButton.addEventListener('click', function () {
+            if (myLibrary[i].read === false) {
+                myLibrary[i].read = true;
+            } else {
+                myLibrary[i].read = false;
+            }
+        });
+        buttonContainer.appendChild(readButton);
 
         let delButton = document.createElement('button');
-        delButton.classList.add(`bookButton${i}`);
+        delButton.classList.add('deleteButton');
+        delButton.classList.add('bookButton');
+        delButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        delButton.addEventListener('click', function () {
+            myLibrary.splice(i, 1)[0];
+            console.log(myLibrary);
+        });
+        buttonContainer.appendChild(delButton);
+
+        let colorButton = document.createElement('button');
+        colorButton.classList.add('bookButton');
+        colorButton.innerHTML = '<i class="fa-solid fa-palette"></i>';
+
+        colorButton.addEventListener('click', function () {
+            if (colorIsOpen === false) {
+                colorButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                colorIsOpen = true;
+                colorPicker.style.display = 'flex';
+                colorSubmit.style.display = 'flex';
+                fontPicker.style.display = 'flex';
+            } else {
+                colorButton.innerHTML = '<i class="fa-solid fa-palette"></i>';
+                colorIsOpen = false;
+                colorPicker.style.display = 'none';
+                colorSubmit.style.display = 'none';
+                fontPicker.style.display = 'none';
+            }
+        });
+        buttonContainer.appendChild(colorButton);
+
+        let colorContainer = document.createElement('div');
+        colorContainer.classList.add('colorContainer');
+
+        let colorPicker = document.createElement('input');
+        colorPicker.type = 'color';
+        colorPicker.value = myLibrary[i].color;
+        colorPicker.classList.add('colorPick');
+        colorPicker.addEventListener('click', function () {});
+        colorContainer.appendChild(colorPicker);
+
+        let fontPicker = document.createElement('button');
+        fontPicker.classList.add('bookButton');
+        fontPicker.classList.add('fontPicker');
+        fontPicker.innerHTML = '<i id="fontId" class="fa-solid fa-font"></i>';
+        fontPicker.addEventListener('click', function () {
+            if (myLibrary[i].fontColor === 'black') {
+                fontPicker.style.color = 'white';
+                myLibrary[i].fontColor = 'white';
+            } else {
+                fontIsBlack = true;
+                fontPicker.style.color = 'black';
+                myLibrary[i].fontColor = 'black';
+            }
+        });
+        colorContainer.appendChild(fontPicker);
+
+        let colorSubmit = document.createElement('button');
+        colorSubmit.classList.add('bookButton');
+        colorSubmit.classList.add('colorSubmit');
+        colorSubmit.innerHTML = '<i class="fa-solid fa-check"></i>';
+        colorSubmit.addEventListener('click', function () {
+            let customColor = colorPicker.value;
+            myLibrary[i].color = customColor;
+            colorIsOpen = false;
+            colorPicker.style.display = 'none';
+            colorSubmit.style.display = 'none';
+            fontPicker.style.display = 'none';
+        });
+        colorContainer.appendChild(colorSubmit);
+        buttonContainer.appendChild(colorContainer);
 
         bookDiv.appendChild(bookEdge);
         wordsDiv.appendChild(bookTitle);
         wordsDiv.appendChild(bookAuthor);
         wordsDiv.appendChild(bookPages);
         wordsDiv.appendChild(readBook);
-        wordsDiv.appendChild(delButton);
         bookDiv.appendChild(wordsDiv);
+        wordsDiv.appendChild(buttonContainer);
         container.appendChild(bookDiv);
-
-        console.log(myLibrary[i]);
     }
 }
+
+let testList = ['1', '2', '3', '4', '5', '6'];
+console.log(testList);
+let testC = testList.splice(2, 3);
+console.log(testC);
+let testD = testC.splice(0, 1);
+console.log(testD);
 
 function showHideForm(show) {
     if (show === true) {
@@ -123,12 +234,8 @@ submitButton.addEventListener('click', function () {
     console.log(titleInfo);
 });
 
-addBookToPage();
-
-for (loop = 0; loop < myLibrary.length; loop++) {
-    let name = `bookButton${loop}`.toString();
-    let className = document.getElementsByClassName(`bookButton${loop}`);
-    className.addEventListener('click', function () {
-        alert('hi');
-    });
-}
+setInterval(function () {
+    if (colorIsOpen != true) {
+        addBookToPage();
+    }
+}, 300);

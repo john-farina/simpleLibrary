@@ -60,7 +60,8 @@ h4 {
     background-color: rgb(224, 211, 175);
     gap: 40px;
     top: 0;
-    margin-top: 70px;
+    margin-top: 100px;
+    padding-bottom: 60px;
     width: 100%;
     height: auto;
 }
@@ -80,6 +81,7 @@ h4 {
     gap: 20px;
     box-shadow: 9px 6px 0px 6px #f1f2dd;
 }
+
 /* 
 .pages {
     display: flex;
@@ -88,6 +90,85 @@ h4 {
     width: 100px;
     height: 200px;
 } */
+
+.buttonCont {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 130px;
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100px;
+    height: 150px;
+}
+.bookButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(186, 186, 186);
+    width: 25px;
+    height: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 100%;
+}
+.bookButton:hover {
+    background-color: rgb(163, 163, 163);
+}
+.fa-solid {
+    color: rgb(93, 93, 93);
+}
+
+.fa-trash-can {
+    font-size: 10px;
+}
+
+.fa-circle-check,
+.fa-circle-xmark {
+    font-size: 12px;
+    margin-left: 0.5px;
+    margin-top: 0.5px;
+}
+
+.colorContainer {
+    position: absolute;
+    margin-top: -75px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 69px;
+}
+
+.colorPick {
+    background-color: rgba(0, 0, 0, 0%);
+    display: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border-style: dashed;
+    margin-right: -1px;
+}
+.colorPick:hover {
+    border-color: red;
+}
+.fontPicker {
+    display: none;
+    background-color: rgba(0, 0, 0, 0%);
+    border-style: none;
+}
+.fa-font {
+    font-size: 18px;
+    color: black;
+}
+.colorSubmit {
+    display: none;
+}
 
 .bookEdge {
     z-index: 5;
@@ -120,11 +201,15 @@ h4 {
 .bookPages {
 }
 
+.fa-folder-plus {
+    font-size: 25px;
+    color: rgba(26, 26, 26, 70%);
+}
 #formButton {
     z-index: 11;
     background-color: rgb(253, 251, 207);
-    border-color: rgb(199, 197, 161);
-    border-width: 4px;
+    border-color: rgb(208, 208, 182);
+    border-width: 3px;
     position: absolute;
     position: fixed;
     left: 0;
@@ -200,5 +285,34 @@ h4 {
         margin-left: 10rem;
         width: 100%;
         height: auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+    }
+    .bookContainer {
+        margin-left: -40px;
+        height: 290px;
+        width: 240px;
+    }
+    .bookEdge {
+        z-index: 5;
+        position: absolute;
+        border-radius: 10px 0px 0px 10px;
+        margin-left: -20px;
+        margin-top: -20px;
+        background: rgb(140, 140, 140);
+        background: linear-gradient(
+            90deg,
+            rgba(140, 140, 140, 1) 2%,
+            rgba(125, 125, 125, 1) 59%
+        );
+        width: 50px;
+        height: 330px;
+    }
+    .buttonCont {
+        margin-top: 190px;
+        margin-left: 120px;
     }
 }
