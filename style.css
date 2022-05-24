@@ -298,6 +298,14 @@ h4 {
 @media only screen and (max-width: 500px) {
     body {
     }
+    #formButton {
+        margin-left: 10px;
+        background-color: rgba(0, 0, 0, 0%);
+        border-style: none;
+    }
+    #formButton:hover {
+        background-color: rgba(0, 0, 0, 0%);
+    }
     .bookContainer {
         margin-left: -40px;
         height: 290px;
